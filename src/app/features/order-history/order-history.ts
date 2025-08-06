@@ -28,7 +28,7 @@ export class OrderHistory implements OnDestroy {
   }
 
   backToDashboard(): void {
-    this.router.navigate(['/user-dashboard']);
+    this.router.navigate(['/dashboard']);
   }
 
   getOrderTotal(order: OrderDetail): number {

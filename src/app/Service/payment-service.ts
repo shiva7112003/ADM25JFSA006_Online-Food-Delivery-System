@@ -15,17 +15,18 @@ export class PaymentService {
   constructor(private CheckoutService: CheckoutService) {}
  
   getDeliveryCharge():number{
-    if (this.getTotal() >= 200) {
-      return 0;
+    if(this.getTotal() >= 200){
+      this.deliveryCharge = 0;
     }
     return this.deliveryCharge;
   }
  
   getTotal(): number {
-    return this.CheckoutService.getTotal();
-  }
+  return this.CheckoutService.getTotal();
+}
   getCartTotal(): number {
-    return this.getTotal() + this.getDeliveryCharge() - this.discount;
+    const sum = this.getTotal();
+    return sum + this.deliveryCharge - this.discount;
   }
  
   applyCoupon(code: string):void {
@@ -79,7 +80,7 @@ export class PaymentService {
  
   getTransactionSummary() {
     return {
-      transactionId : this.transactionId || this.generateTransactionId(),
+      transactionId : this.generateTransactionId(),
       method: this.selectedMethod,
       cardType: this.cardType,
       coupon: this.coupon,

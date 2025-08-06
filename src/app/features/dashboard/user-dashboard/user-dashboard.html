@@ -1,7 +1,7 @@
 <app-nav-profile></app-nav-profile>
 <div class="full">
   <div class="dashboard-container">
-    <h2>User Dashboard</h2>
+    <h2>Profile Dashboard</h2>
 
     <div *ngIf="profileService.error | async as err" class="error">
       ⚠️ {{ err }}
@@ -39,37 +39,44 @@
     <div class="section orders">
       <h3>Recent Food Orders</h3>
 
-      <div *ngIf="recentOrders.length > 0; else noRecent">
-        <div *ngFor="let order of recentOrders" class="order-card">
-          <div class="order-header">
-            <span><strong>ID:</strong> {{ order.orderId }}</span>
-            <span><strong>Customer ID:</strong> {{ order.id }}</span>
-            <span><strong>Restaurant ID:</strong> {{ order.restaurant_id }}</span>
-            <span class="status"
-                  [class.delivered]="order.status === 'Delivered'"
-                  [class.pending]="order.status === 'Pending'"
-                  [class.cancelled]="order.status === 'Cancelled'">
-              {{ order.status }}
-            </span>
-          </div>
-          <p><strong>Restaurant:</strong> {{ order.restaurant }}</p>
-
-
-          <div><strong>Items:</strong>
-            <ul>
-              <li *ngFor="let item of order.items">
-                🍽️ {{ item.name }} × {{ item.quantity }} — ₹{{ item.price }}
-              </li>
-            </ul>
-          </div>
-
-          <p><strong>Total:</strong> ₹{{ getOrderTotal(order) }}</p>
-        </div>
+      <!-- Loading state for orders -->
+      <div *ngIf="isLoadingOrders" class="loading-state">
+        <p>⏳ Loading your recent orders...</p>
       </div>
 
-      <ng-template #noRecent>
-        <p class="no-recent-orders">No recent orders available 😕</p>
-      </ng-template>
+      <!-- Orders content -->
+      <div *ngIf="!isLoadingOrders">
+        <div *ngIf="recentOrders.length > 0; else noRecent">
+          <div *ngFor="let order of recentOrders" class="order-card">
+            <div class="order-header">
+              <span><strong>ID:</strong> {{ order.orderId }}</span>
+              <span><strong>Customer ID:</strong> {{ order.id }}</span>
+              <span><strong>Restaurant ID:</strong> {{ order.restaurant_id }}</span>
+              <span class="status"
+                    [class.delivered]="order.status === 'Delivered'"
+                    [class.pending]="order.status === 'Pending'"
+                    [class.cancelled]="order.status === 'Cancelled'">
+                {{ order.status }}
+              </span>
+            </div>
+            <p><strong>Restaurant:</strong> {{ order.restaurant }}</p>
+
+            <div><strong>Items:</strong>
+              <ul>
+                <li *ngFor="let item of order.items">
+                  🍽️ {{ item.name }} × {{ item.quantity }} — ₹{{ item.price }}
+                </li>
+              </ul>
+            </div>
+
+            <p><strong>Total:</strong> ₹{{ getOrderTotal(order) }}</p>
+          </div>
+        </div>
+
+        <ng-template #noRecent>
+          <p class="no-recent-orders">No recent orders available 😕</p>
+        </ng-template>
+      </div>
     </div>
   </div>
 </div>

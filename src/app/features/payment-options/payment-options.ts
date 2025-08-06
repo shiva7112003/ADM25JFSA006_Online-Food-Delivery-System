@@ -81,16 +81,16 @@ export class PaymentOptions {
   setCardBrandLogo(binPrefix: string): void {
     switch (true) {
       case binPrefix.startsWith('4'):
-        this.cardBrandLogo = './assests/visa.png';
+        this.cardBrandLogo = './image/visa.png';
         break;
       case binPrefix.startsWith('5'):
-        this.cardBrandLogo = './assests/master.png';
+        this.cardBrandLogo = './image/master.png';
         break;
       case binPrefix.startsWith('3'):
-        this.cardBrandLogo = './assests/amex.jpg';
+        this.cardBrandLogo = './image/amex.jpg';
         break;
       default:
-        this.cardBrandLogo = './assests/unknown.jpg';
+        this.cardBrandLogo = './image/unknown.jpg';
     }
   }
  
@@ -157,15 +157,8 @@ export class PaymentOptions {
     this.transactionService.saveTransaction(transaction).subscribe({
       next: () => {
         this.paymentSuccess = true;
-      //   setTimeout(() => {
-      //   this.loadingPayment = false;
-      //   console.log('Routing to summary...', transaction);
-      //   this.router.navigate(['/payment-summary'], {
-      //     state: { data: transaction },
-      //   }).then(success => console.log('Navigation success:', success));
-      // }, 1200);
-      this.router.navigate(['/payment-summary'], {
-          state: { data: transaction },
+          this.router.navigate(['/payment-summary'], {
+            state: { data: transaction },
         }).then(success => console.log('Navigation success:', success));
 
       },

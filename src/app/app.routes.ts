@@ -9,7 +9,7 @@ import { PaymentSummary } from './features/payment-summary/payment-summary';
 export const routes: Routes = [
   { path: 'user-dashboard', component: UserDashboard, title: 'User Dashboard' },
   { path: '', component: Checkout, title: 'checkout' },
-  {path:'checkout',component:Checkout,title:'checkout'},
+  { path: 'checkout',component:Checkout,title:'checkout'},
   { path: 'payment-options', component: PaymentOptions, title: 'Payment Options' },
   { path: 'payment-summary', component: PaymentSummary, title: 'Payment Summary' },
   { path: 'profile-edit', component: ProfileEdit, title: 'Edit Profile' },
