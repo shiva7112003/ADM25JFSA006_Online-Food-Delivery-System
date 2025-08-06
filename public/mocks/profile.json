@@ -1,0 +1,135 @@
+{
+  "profile": {
+    "customer_id": 0,
+    "name": "Shiva",
+    "email": "chaandy@gmail.com",
+    "phone": "1312313211",
+    "address": "House No: 6A, Hyder garden !st street, ch-12\n"
+  },
+  "orders": [
+    {
+      "orderId": "FD2025001",
+      "id": "101",
+      "restaurant_id": 501,
+      "restaurant": "Spice Garden",
+      "status": "Delivered",
+      "items": [
+        {
+          "name": "Butter Chicken",
+          "quantity": 1,
+          "price": 349
+        },
+        {
+          "name": "Garlic Naan",
+          "quantity": 2,
+          "price": 40
+        }
+      ]
+    },
+    {
+      "orderId": "FD2025002",
+      "id": "101",
+      "restaurant_id": 502,
+      "restaurant": "Sushi Express",
+      "status": "Delivered",
+      "items": [
+        {
+          "name": "California Roll",
+          "quantity": 1,
+          "price": 299
+        },
+        {
+          "name": "Miso Soup",
+          "quantity": 1,
+          "price": 120
+        }
+      ]
+    },
+    {
+      "orderId": "FD2025003",
+      "id": "101",
+      "restaurant_id": 502,
+      "restaurant": "Sushi Express",
+      "status": "Cancelled",
+      "items": [
+        {
+          "name": "Cinnamon Roll",
+          "quantity": 1,
+          "price": 289
+        }
+      ]
+    },
+    {
+      "orderId": "FD2025003",
+      "id": "101",
+      "restaurant_id": 503,
+      "restaurant": "Burger Point",
+      "status": "Cancelled",
+      "items": [
+        {
+          "name": "Cheese Burger",
+          "quantity": 2,
+          "price": 160
+        }
+      ]
+    }
+  ],
+  "transaction": [
+    {
+      "id": "54c5",
+      "transactionId": "TXN-1754311854747",
+      "method": "UPI",
+      "cardType": "Unknown",
+      "coupon": "",
+      "amount": 200
+    },
+    {
+      "id": "229b",
+      "transactionId": "TXN-1754311889693",
+      "method": "COD",
+      "cardType": "Unknown",
+      "coupon": "",
+      "amount": 200
+    },
+    {
+      "id": "07e7",
+      "transactionId": "TXN-1754316599150",
+      "method": "COD",
+      "cardType": "Unknown",
+      "coupon": "",
+      "amount": 200
+    },
+    {
+      "id": "cb68",
+      "transactionId": "TXN-1754376371444",
+      "method": "COD",
+      "cardType": "Unknown",
+      "coupon": "",
+      "amount": 200
+    },
+    {
+      "id": "2e83",
+      "transactionId": "TXN-1754386778767",
+      "method": "COD",
+      "cardType": "Unknown",
+      "coupon": "",
+      "amount": 200
+    },
+    {
+      "id": "d420",
+      "transactionId": "TXN-1754394516107",
+      "method": "COD",
+      "cardType": "Unknown",
+      "coupon": "",
+      "amount": 200
+    },
+    {
+      "id": "4157",
+      "transactionId": "TXN-1754395490691",
+      "method": "COD",
+      "cardType": "Unknown",
+      "coupon": "",
+      "amount": 200
+    }
+  ]
+}

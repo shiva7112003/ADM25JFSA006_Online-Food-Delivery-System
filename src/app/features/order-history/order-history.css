@@ -1,0 +1,439 @@
+/* Overall container for the order history content - now acts as the main page wrapper */
+.order-history-container {
+  min-height: 100vh; /* Ensures it takes full viewport height */
+  background: white; /* Soft off-white, clean and airy background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem; /* Overall page padding */
+  box-sizing: border-box;
+  color: #333333; /* Dark grey for general text, excellent readability */
+  max-width: 1200px; /* Increased max-width to allow more items in a row */
+  width: 100%; /* Ensure it takes full width up to max-width */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+/* Heading styles */
+.order-history-container h2 { /* Targeting h2 directly inside .order-history-container */
+  font-size: 2.5rem; /* Larger, impactful heading */
+  font-weight: 900; /* Ultra bold */
+  color: #FF5722; /* Warm Orange/Red for inviting feel */
+  margin-bottom: 2.5rem; /* More space below heading */
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.8rem; /* Space for the underline */
+  text-shadow: 0 0 10px rgba(255, 87, 34, 0.4), 0 0 20px rgba(255, 87, 34, 0.2); /* Subtle glow */
+  letter-spacing: 1.8px; /* More spaced out letters */
+  width: 100%; /* Ensure heading spans full width */
+}
+
+.order-history-container h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0; /* Aligned with padding-bottom of h2 */
+  transform: translateX(-50%);
+  width: 120px; /* Longer, thicker underline */
+  height: 6px;
+  background: #FF5722; /* Solid Orange for the underline */
+  border-radius: 3px;
+}
+
+/* Loading indicator */
+.loading-indicator {
+  text-align: center;
+  color: #4CAF50; /* Green accent */
+  font-weight: 600;
+  margin-bottom: 2rem;
+  animation: pulse 1.5s infinite ease-in-out;
+  width: 100%;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Alert styles (Error and Success) */
+.error-alert, .success-alert {
+  padding: 1.3rem 1.6rem;
+  border-radius: 0.9rem;
+  margin-bottom: 2.2rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+  width: 100%; /* Ensure alerts take full width of container */
+  box-sizing: border-box;
+}
+
+.error-alert {
+  background-color: rgba(231, 76, 60, 0.1);
+  border: 1px solid #E74C3C;
+  color: #E74C3C;
+}
+
+.success-alert {
+  background-color: rgba(46, 204, 113, 0.1);
+  border: 1px solid #2ECC71;
+  color: #2ECC71;
+}
+
+.error-alert strong, .success-alert strong {
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Orders list container - now a flex row */
+.order-history-container > ul { /* Target the ul directly inside order-history-container */
+  display: flex;
+  flex-direction: row; /* Changed to row for horizontal layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 1.8rem; /* Spacing between individual order cards in a row */
+  list-style: none; /* Remove default list bullets */
+  padding: 0; /* Remove default padding */
+  width: 100%; /* Ensure list takes full width of its parent */
+  margin-top: 2rem; /* Add some space between heading/alerts and the list */
+  justify-content: center; /* Center rows of cards */
+}
+
+/* Individual order item card - made more attractive */
+.order-item { /* This class is applied to each <li> in your HTML */
+  background-color: whitesmoke; /* Pure white for cards */
+  padding: 2rem; /* Generous padding inside each order card */
+  border-radius: 1rem; /* Consistent rounded corners */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05); /* Enhanced, softer shadow */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle light border */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  /* Flex properties for items in a row */
+  flex: 1 1 calc(33.333% - 1.2rem); /* Three items per row with gap */
+  max-width: calc(33.333% - 1.2rem); /* Ensure max width for three columns */
+  min-width: 300px; /* Minimum width before wrapping */
+  box-sizing: border-box; /* Include padding/border in width calculation */
+
+  /* Internal layout for order details within the card */
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem; /* Space between detail paragraphs */
+}
+
+.order-item:hover {
+  transform: translateY(-5px); /* More pronounced lift on hover */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 6px 15px rgba(0, 0, 0, 0.08); /* Stronger shadow on hover */
+}
+
+/* Order details within each order item */
+.order-item p { /* Target all paragraphs directly inside .order-item */
+  margin: 0; /* Remove default paragraph margins */
+  line-height: 1.4; /* Better line spacing for readability */
+  color: #333333; /* Dark text for details */
+  font-size: 1rem; /* Standard font size for details */
+}
+
+.order-item p strong { /* Style for the strong tags within order detail paragraphs */
+  font-weight: 700;
+  color: #FF5722; /* Warm Orange/Red for labels */
+  margin-right: 0.5rem; /* Small space between label and value */
+}
+
+/* Status line within the order item */
+.order-item p:has(span[class*="badge-"]) { /* Selects p that contains a badge span */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap; /* Allow status line to wrap if content is long */
+}
+
+/* Status badge styles */
+.badge-delivered, .badge-pending, .badge-cancelled { /* Using your HTML class names */
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.9rem; /* Generous padding for badges */
+  border-radius: 0.75rem; /* More rounded badges */
+  font-size: 0.85rem; /* Slightly larger text in badges */
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffffff; /* White text for all status badges */
+}
+
+.badge-delivered {
+  background-color: #2ECC71; /* Vibrant Green */
+}
+
+.badge-pending {
+  background-color: #FFC107; /* Vibrant Yellow/Orange */
+}
+
+.badge-cancelled {
+  background-color: #E74C3C; /* Vibrant Red */
+}
+
+/* Total line within the order item */
+.order-item p:last-of-type { /* Target the last paragraph (Total) */
+  font-weight: 700;
+  font-size: 1.4rem; /* Larger total font size */
+  color: #4CAF50; /* Green for total */
+  text-align: left; /* Align total to the left */
+  margin-top: 1rem; /* Space above total */
+}
+
+.order-item p:last-of-type strong { /* Style for the strong tag in Total line */
+  color: #4CAF50; /* Ensure strong tag also matches total color */
+}
+
+
+/* Items list section within each order card */
+.items-list {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1); /* Subtle dashed separator */
+}
+
+.items-list p { /* Targeting the "Items:" heading within items-list */
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.items-list ul { /* The actual list of items */
+  list-style: disc;
+  list-style-position: inside;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem; /* Space between individual items */
+  color: #555555; /* Darker grey for item text */
+  padding-left: 0; /* Remove default ul padding */
+}
+
+.items-list li { /* Each item entry */
+  line-height: 1.4;
+}
+
+.items-list li span { /* For quantity and price spans */
+  font-weight: 600;
+  color: #333333; /* Darker text for quantity/price */
+}
+
+/* Separator line for each order item */
+.order-item hr { /* Target hr directly inside .order-item */
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08); /* Lighter, cleaner separator */
+  margin: 2rem 0; /* More vertical space around separator */
+}
+
+/* Order actions buttons (reorder/cancel) */
+/* The buttons are directly inside the <li>, so we apply flex to the <li> itself */
+.order-item .action-button { /* Target buttons directly inside order-item */
+  background: linear-gradient(135deg, #FF5722 0%, #FF8C00 100%); /* Warm Orange gradient */
+  color: #ffffff;
+  font-weight: 700;
+  padding: 1rem 1.5rem; /* Larger buttons */
+  border-radius: 0.8rem; /* More rounded buttons */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  width: 100%; /* Make buttons full width within the card */
+  margin-top: 0.5rem; /* Small margin between buttons if stacked */
+}
+
+.order-item .reorder-button:hover {
+  background: linear-gradient(135deg, #FF8C00 0%, #FF5722 100%); /* Reverse gradient on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 87, 34, 0.4);
+}
+
+.order-item .reorder-button:focus {
+  box-shadow: 0 0 0 4px rgba(255, 87, 34, 0.4);
+}
+
+.order-item .cancel-button {
+  background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%); /* Red gradient */
+}
+
+.order-item .cancel-button:hover {
+  background: linear-gradient(135deg, #C0392B 0%, #E74C3C 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+}
+
+.order-item .cancel-button:focus {
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.4);
+}
+
+
+/* No orders message */
+.order-history-container > ng-template > p { /* Target the p directly inside ng-template */
+  text-align: center;
+  color: #888888; /* Neutral grey */
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  border: 1px dashed #DDDDDD;
+  border-radius: 0.8rem;
+  background-color: #FDFDFD;
+  width: 100%; /* Ensure it takes full width */
+  box-sizing: border-box;
+  font-size: 1.25rem; /* Specific styling for the main text */
+  font-weight: 600;
+}
+
+/* Back button */
+.order-history-container > button.back-button { /* Target the back-button directly inside order-history-container */
+  background: linear-gradient(135deg, #FF5722 0%, #FF8C00 100%); /* Orange gradient for consistency */
+  color: #ffffff;
+  font-weight: 700;
+  padding: 1rem 2rem; /* Larger button */
+  border-radius: 0.8rem;
+  box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3); /* Orange shadow */
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  max-width: fit-content; /* Adjust width based on content */
+  margin-top: 3rem; /* More space */
+}
+
+.order-history-container > button.back-button:hover {
+  background: linear-gradient(135deg, #FF8C00 0%, #FF5722 100%); /* Reverse gradient on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 87, 34, 0.5); /* Enhanced orange shadow */
+}
+
+.order-history-container > button.back-button:focus {
+  box-shadow: 0 0 0 4px rgba(255, 87, 34, 0.4); /* Orange focus ring */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 1200px) { /* Adjust for screens where 3 columns might be too tight */
+  .order-item {
+    flex: 1 1 calc(50% - 0.9rem); /* Two items per row with gap */
+    max-width: calc(50% - 0.9rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .order-history-container {
+    padding: 1.5rem;
+  }
+  .order-history-container h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1.5px;
+  }
+  .order-history-container h2::after {
+    width: 90px;
+    height: 5px;
+  }
+  .order-item {
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    flex: 1 1 100%; /* Stack items vertically on smaller screens */
+    max-width: 100%;
+  }
+  .order-item p {
+    font-size: 0.95rem;
+  }
+  .badge-delivered, .badge-pending, .badge-cancelled {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+  }
+  .order-item p:last-of-type { /* Total line */
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+  }
+  .items-list {
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+  }
+  .items-list p {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  .items-list ul {
+    gap: 0.3rem;
+  }
+  .items-list li {
+    font-size: 0.95rem;
+  }
+  .order-item hr {
+    margin: 1.5rem 0;
+  }
+  .order-item .action-button {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
+  }
+  .order-history-container > ng-template > p {
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+  .order-history-container > button.back-button {
+    margin-top: 2.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-history-container {
+    padding: 1rem;
+  }
+  .order-history-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+  }
+  .order-history-container h2::after {
+    width: 70px;
+    height: 4px;
+  }
+  .order-item {
+    padding: 1rem;
+    border-radius: 0.7rem;
+  }
+  .order-item p {
+    font-size: 0.85rem;
+  }
+  .badge-delivered, .badge-pending, .badge-cancelled {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+  }
+  .order-item p:last-of-type { /* Total line */
+    font-size: 1.1rem;
+  }
+  .items-list {
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+  .items-list p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+  .items-list ul {
+    font-size: 0.85rem;
+  }
+  .order-item hr {
+    margin: 1rem 0;
+  }
+  .order-item .action-button {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+  .order-history-container > ng-template > p {
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+  }
+  .order-history-container > button.back-button {
+    margin-top: 2rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}

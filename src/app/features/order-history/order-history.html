@@ -1,0 +1,42 @@
+<app-nav-profile></app-nav-profile>
+<div class="order-history-container">
+  <h2>📦 Your Order History</h2>
+
+  <ul *ngIf="orderList.length > 0; else noOrders">
+    <li *ngFor="let order of orderList" class="order-item">
+      <p><strong>Order ID:</strong> {{ order.orderId }}</p>
+      <p><strong>Restaurant ID:</strong> {{ order.restaurant_id }}</p>
+      <p><strong>Restaurant:</strong> {{ order.restaurant }}</p>
+      <p>
+        <strong>Status:</strong>
+        <span [ngClass]="{
+          'badge-delivered': order.status === 'Delivered',
+          'badge-pending': order.status === 'Pending',
+          'badge-cancelled': order.status === 'Cancelled'
+        }">
+          {{ order.status }}
+        </span>
+      </p>
+
+      <div class="items-list">
+        <p><strong>Items:</strong></p>
+        <ul>
+          <li *ngFor="let item of order.items">
+            🍽️ {{ item.name }} — Qty: {{ item.quantity }}, ₹{{ item.price }}
+          </li>
+        </ul>
+      </div>
+
+      <p><strong>Total:</strong> ₹{{ getOrderTotal(order) }}</p>
+
+      <hr />
+    </li>
+  </ul>
+
+  <ng-template #noOrders>
+    <p>🫤 No orders found.</p>
+  </ng-template>
+
+  <button class="back-button" (click)="backToDashboard()">🔙 Back to Dashboard</button>
+</div>
+<app-footer></app-footer>

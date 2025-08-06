@@ -1,0 +1,82 @@
+ 
+.navbar {
+  /* position: sticky; */
+  margin: 0;
+ 
+  background: linear-gradient(135deg, #670E10, #A91B0D, #FF5722);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 1000;
+  /* font-family: 'Segoe UI', sans-serif; */
+}
+ 
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+ 
+.brand-logo-title {
+  display: flex;
+  align-items: center;
+}
+ 
+.logo {
+  height: 64px;   /* Increase from 48px */
+  width: 64px;    /* Increase from 48px */
+  margin-right: 16px; /* Optional: increase spacing */
+  border-radius: 50%;
+  object-fit: cover;
+}
+.logo:hover {
+  transform: scale(1.15);
+  transition: transform 0.3s;
+}
+ 
+.brand-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 1px;
+}
+ 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+ 
+.nav-button {
+  background-color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #444;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+ 
+.nav-button:hover {
+  color: #e64a19;
+  border-color: #ff5722;
+  background-color: #fff7f4;
+  box-shadow: 0 4px 10px rgba(255,87,34,0.2);
+  transform: translateY(-1px);
+}
+ 
+.nav-button:active {
+  transform: scale(0.98);
+}
+ 
+.nav-button i {
+  font-size: 18px;
+  transition: color 0.3s ease;
+}

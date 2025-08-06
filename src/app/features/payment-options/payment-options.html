@@ -1,0 +1,123 @@
+<app-nav-checkout></app-nav-checkout>
+ 
+<div class="payment-options">
+<div class="payment-container">
+  <!-- 🧾 Summary Section -->
+   <div *ngIf="errormsg" class="error-box">
+      <i class="fas fa-exclamation-circle"></i> {{ errormsg }}
+    </div>
+ 
+  <h3 class="order-summary" style="text-align: center;">Order Summary</h3>
+  <div class="cart-summary">
+    <div class="summary-row">
+      <span>Item Total</span>
+      <span>₹{{ getTotal() }}</span>
+    </div>
+    <div class="summary-row">
+      <span>Delivery Charge</span>
+      <span>₹{{getDeliveryCharge()}}</span>
+    </div>
+    <div class="summary-row" *ngIf="paymentService.getCoupon()">
+      <span>Discount</span>
+      <span>-₹{{ getDiscount() }}</span>
+    </div>
+    <div class="summary-row total">
+      <strong>Total Payable</strong>
+      <strong>₹{{ getCartTotal() }}</strong>
+    </div>
+  </div>
+ 
+  <!-- 🎟️ Coupon Section -->
+  <input
+    type="text"
+    class="payment-method-input"
+    [(ngModel)]="couponCode"
+    placeholder="Apply Coupon Code (e.g. SPICY100)"
+  />
+  <button (click)="applyCoupon()" class="apply-btn">Apply</button>
+ 
+  <!-- 💳 Payment Method Selection -->
+  <h2 style="text-align: center;">Select Payment Method</h2>
+ 
+  <!-- 🔷 UPI Option -->
+  <label [class.selected]="selectedOption === 'UPI'">
+    <input type="radio" value="UPI" [(ngModel)]="selectedOption" />
+    <i class="fas fa-mobile-alt"></i> UPI
+  </label>
+  <div *ngIf="selectedOption === 'UPI'">
+    <input
+      class="payment-method-input"
+      [(ngModel)]="upiId"
+      placeholder="Enter UPI ID (e.g. yourname@bank)"
+      [ngClass]="{
+        valid: isValidUpiId(upiId),
+        invalid: upiId && !isValidUpiId(upiId)
+      }"
+    />
+    <div class="invalid-feedback" *ngIf="getUpiError()">
+      {{ getUpiError() }}
+    </div>
+  </div>
+ 
+  <!-- 💳 Card Option -->
+  <label [class.selected]="selectedOption === 'Card'">
+    <input type="radio" value="Card" [(ngModel)]="selectedOption" />
+    <i class="fas fa-credit-card"></i> Debit/Credit Card
+  </label>
+  <div *ngIf="selectedOption === 'Card'">
+    <div class="input-with-icon">
+      <img *ngIf="cardBrandLogo" [src]="cardBrandLogo" alt="Card Logo" class="card-icon" />
+      <input
+      type="text"
+      class="payment-method-input with-logo"
+      [value]="cardDetails.number"
+      (input)="onCardInput($event)"
+      placeholder="Card Number"
+      />
+    </div>
+ 
+    <input
+      type="text"
+      class="payment-method-input"
+      [(ngModel)]="cardDetails.expiry"
+      placeholder="Expiry (MM/YY)"
+      [ngClass]="{
+        valid: isValidExpiry(cardDetails.expiry),
+        invalid: cardDetails.expiry && !isValidExpiry(cardDetails.expiry)
+      }"
+    />
+    <div class="invalid-feedback" *ngIf="cardDetails.expiry && !isValidExpiry(cardDetails.expiry)">
+      Invalid expiry date — use MM/YY format
+    </div>
+ 
+    <input
+      type="password"
+      class="payment-method-input"
+      [(ngModel)]="cardDetails.cvv"
+      placeholder="CVV"
+      maxlength="4"
+    />
+  </div>
+ 
+  <!-- 📦 COD Option -->
+  <label [class.selected]="selectedOption === 'COD'">
+    <input type="radio" value="COD" [(ngModel)]="selectedOption" />
+    <i class="fas fa-box-open"></i> Cash on Delivery
+  </label>
+ 
+  <!-- ✅ Pay Button -->
+  <button class="pay-btn" (click)="payNow()" [disabled]="loadingPayment">
+      {{ loadingPayment ? 'Processing...' : 'Pay ₹' + getCartTotal() }}
+    </button>
+    <div *ngIf="loadingPayment" class="loading-overlay">
+      <div class="spinner"></div>
+      <p>Hang tight! We’re confirming your transaction…</p>
+    </div>
+   
+   
+</div>
+ 
+</div>
+ 
+<app-footer></app-footer>
+ 

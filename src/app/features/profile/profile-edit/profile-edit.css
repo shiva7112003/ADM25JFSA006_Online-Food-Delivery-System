@@ -1,0 +1,556 @@
+/* General container for the profile page */
+.full {
+  min-height: 100vh;
+  background: white; /* Soft off-white, clean and airy */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem; /* Increased padding for overall page */
+  color: #333333; /* Dark grey for general text, excellent readability */
+  box-sizing: border-box;
+}
+
+/* Main profile content area (the container around the white card) */
+.profile-container {
+  width: 100%;
+  max-width: 40rem; /* Wider for a more substantial presence */
+  padding: 0 1.5rem; /* Horizontal padding for responsiveness */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+/* Main Heading (Edit Your Profile / Your Profile) */
+.profile-heading {
+  font-size: 2.5rem; /* Larger, more impactful heading */
+  font-weight: 900; /* Ultra bold */
+  color: #FF5722; /* Warm Orange/Red for inviting feel */
+  margin-bottom: 2.5rem; /* More space below heading */
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.8rem;
+  letter-spacing: 1.8px; /* More spaced out letters */
+}
+
+.profile-heading::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 120px; /* Longer, thicker underline */
+  height: 6px;
+  background: #FF5722; /* Solid Orange for the underline */
+  border-radius: 3px;
+}
+
+/* Toggle Button Group */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem; /* More space between buttons */
+  margin-bottom: 3rem; /* More space below the button group */
+  width: 100%;
+  max-width: 38rem; /* Match card width for alignment */
+}
+
+/* Toggle button styles */
+.toggle-button {
+  background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%); /* Appetizing Green gradient */
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.9rem 2rem; /* Larger, more prominent buttons */
+  border-radius: 0.8rem; /* Slightly more rounded */
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4); /* Stronger shadow */
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1.2px; /* More letter spacing */
+  text-transform: uppercase;
+  flex-grow: 1;
+  max-width: 50%;
+  text-align: center;
+}
+
+.toggle-button:hover {
+  background: linear-gradient(135deg, #388E3C 0%, #4CAF50 100%); /* Reverse gradient on hover */
+  box-shadow: 0 12px 25px rgba(76, 175, 80, 0.6);
+  transform: translateY(-3px) scale(1.02); /* More pronounced lift and slight scale */
+}
+
+.toggle-button:focus {
+  box-shadow: 0 0 0 5px rgba(76, 175, 80, 0.5); /* More prominent focus ring */
+}
+
+/* Main white container for Profile Details / Form */
+.main-card {
+  background-color: whitesmoke; /* Pure white for cleanliness */
+  padding: 3rem; /* Even more generous padding */
+  border-radius: 1.2rem; /* More rounded, softer edges */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05); /* Lighter, cleaner shadow */
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.08); /* Very subtle light border */
+  box-sizing: border-box;
+  position: relative; /* For pseudo-elements */
+  overflow: hidden; /* Ensure no overflow from inner elements */
+  display: flex; /* Use flexbox for internal alignment */
+  flex-direction: column; /* Stack avatar, alerts, form/view vertically */
+  align-items: center; /* Center content horizontally within the card */
+}
+
+/* Subtle background pattern/glow for futuristic feel (adjusted for lighter theme) */
+.main-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.main-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg) translate(0, 0); }
+  to { transform: rotate(360deg) translate(25px, 25px); }
+}
+
+/* Profile Avatar Section */
+.profile-avatar-section {
+  margin-bottom: 2.5rem; /* More space below avatar section */
+  display: flex;
+  justify-content: center; /* Center the avatar wrapper */
+  width: 100%; /* Take full width to center */
+}
+
+.profile-avatar-wrapper {
+  position: relative;
+  width: 110px; /* Slightly larger avatar size for prominence */
+  height: 110px; /* Slightly larger avatar size */
+  border-radius: 50%;
+  background: linear-gradient(45deg, #4CAF50, #FF5722); /* Green to Orange gradient background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid transparent; /* Thicker transparent border for glow effect */
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.7), 0 0 40px rgba(255, 87, 34, 0.5); /* Initial glow */
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.profile-avatar-wrapper:hover {
+  transform: scale(1.07); /* More pronounced scale on hover */
+}
+
+.profile-avatar {
+  width: calc(100% - 8px); /* Slightly smaller to show thicker border/glow */
+  height: calc(100% - 8px);
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff; /* White border around actual image */
+}
+
+/* Removed .camera-icon styles as it's no longer in the HTML */
+
+
+/* Loading indicator styles */
+.loading-indicator {
+  text-align: center;
+  color: #4CAF50; /* Green accent */
+  font-weight: 600;
+  margin-bottom: 2rem;
+  animation: pulse 1.5s infinite ease-in-out;
+  width: 100%; /* Ensure it centers within the card */
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Alert styles (Error and Success) */
+.error-alert, .success-alert {
+  padding: 1.3rem 1.6rem; /* More padding */
+  border-radius: 0.9rem; /* More rounded */
+  margin-bottom: 2.2rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* More space */
+  font-size: 1.1rem; /* Slightly larger text */
+  border: 1px solid; /* Defined border */
+  width: 100%; /* Ensure it takes full width within the card */
+  box-sizing: border-box;
+  text-shadow: none; /* No text shadow on lighter alerts */
+}
+
+.error-alert {
+  background-color: rgba(231, 76, 60, 0.1); /* Lighter transparent red */
+  border-color: #E74C3C;
+  color: #E74C3C;
+}
+
+.success-alert {
+  background-color: rgba(46, 204, 113, 0.1); /* Lighter transparent green */
+  border-color: #2ECC71;
+  color: #2ECC71;
+}
+
+.error-alert strong, .success-alert strong {
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Form styles - This is the <form> element */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem; /* More space between form groups */
+  width: 100%; /* Ensure it takes full width within the card */
+}
+
+.form-group {
+  margin-bottom: 0; /* Managed by form gap */
+}
+
+.form-group label {
+  display: block;
+  color: #333333; /* Dark grey label color for readability */
+  font-size: 1rem; /* Slightly larger label */
+  font-weight: 700;
+  margin-bottom: 0.9rem; /* More space */
+  letter-spacing: 0.06em; /* More letter spacing */
+  text-transform: uppercase; /* Uppercase labels */
+  text-shadow: none; /* No text shadow on lighter labels */
+}
+
+.input-field {
+  background-color: #FDFDFD; /* Very light background for inputs */
+  border: 2px solid #DDDDDD; /* Soft grey border */
+  border-radius: 0.7rem; /* Slightly more rounded */
+  width: 100%;
+  padding: 1rem 1.3rem; /* More padding */
+  color: #333333; /* Dark text color */
+  font-size: 1rem; /* Slightly larger input text */
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.input-field:hover {
+  border-color: #B0B0B0; /* Slightly darker grey on hover */
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.15);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #FF5722; /* Warm Orange/Red on focus */
+  background-color: #FFFFFF; /* Keep white background on focus */
+}
+
+/* Placeholder text color */
+.input-field::placeholder {
+  color: #888888; /* Darker grey for placeholders */
+  opacity: 1;
+}
+
+/* Error messages below form fields */
+.error-messages {
+  color: #E74C3C;
+  font-size: 0.9rem; /* Slightly larger error text */
+  margin-top: 0.7rem; /* More space */
+  font-weight: 600;
+  padding-left: 0.4rem;
+  text-shadow: none; /* No text shadow */
+}
+
+/* Save button styles */
+.save-button {
+  background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%); /* Green gradient */
+  color: #ffffff;
+  font-weight: 700;
+  padding: 1.1rem 2.2rem; /* Larger button */
+  border-radius: 0.9rem;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(46, 204, 113, 0.5);
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-top: 2.5rem; /* More space above button */
+}
+
+.save-button:hover {
+  background: linear-gradient(135deg, #388E3C 0%, #4CAF50 100%);
+  box-shadow: 0 15px 30px rgba(46, 204, 113, 0.7);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.save-button:focus {
+  box-shadow: 0 0 0 6px rgba(46, 204, 113, 0.6);
+}
+
+.save-button:disabled {
+  opacity: 0.4; /* More transparent when disabled */
+  cursor: not-allowed;
+  background: #A0A0A0; /* Lighter grey for disabled */
+  box-shadow: none;
+  transform: none;
+}
+
+/* Profile view mode styles */
+.profile-view {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem; /* More spacing */
+  color: #333333; /* Dark text for view text */
+  font-size: 1rem; /* Larger text */
+  padding: 0;
+  width: 100%; /* Ensure it takes full width within the card */
+}
+
+.profile-view-item {
+  display: flex; /* Make each item a flex container */
+  align-items: baseline; /* Align text baselines */
+  flex-wrap: wrap; /* Allow wrapping if content is too long */
+  margin-bottom: 0.5rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.1); /* Subtle dashed separator */
+}
+
+.profile-view-item:last-child {
+  border-bottom: none; /* No border on last item */
+}
+
+.profile-view-item strong {
+  flex-shrink: 0; /* Prevent label from shrinking */
+  font-weight: 700;
+  color: #FF5722; /* Warm Orange/Red for labels */
+  margin-right: 1.8rem; /* Increased space between label and value */
+  text-shadow: none; /* No text shadow */
+}
+
+.profile-view-item span {
+  flex-grow: 1; /* Allow the value to take remaining space */
+  text-align: left; /* Align value to the left */
+  font-weight: 500;
+}
+
+
+/* Dashboard button in view mode */
+.dashboard-button {
+  background: linear-gradient(135deg, #FF5722 0%, #FF8C00 100%); /* Warm Orange gradient */
+  color: #ffffff;
+  font-weight: 700;
+  padding: 1.1rem 2.2rem;
+  border-radius: 0.9rem;
+  width: 100%;
+  margin-top: 3rem; /* More space */
+  box-shadow: 0 10px 25px rgba(255, 87, 34, 0.5);
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.dashboard-button:hover {
+  background: linear-gradient(135deg, #FF8C00 0%, #FF5722 100%);
+  box-shadow: 0 15px 30px rgba(255, 87, 34, 0.7);
+  transform: translateY(-4px) scale(1.03);
+}
+
+.dashboard-button:focus {
+  box-shadow: 0 0 0 6px rgba(255, 87, 34, 0.6);
+}
+
+/* Message for no profile data */
+.no-profile-data {
+  text-align: center;
+  color: #888888; /* Neutral grey for lighter background */
+  margin-top: 2.5rem;
+  font-style: italic;
+  font-size: 1rem;
+  width: 100%; /* Ensure it takes full width within the card */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .full {
+    padding: 1.5rem;
+  }
+  .profile-container {
+    padding: 0 1rem;
+  }
+  .profile-heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1.5px;
+  }
+  .profile-heading::after {
+    width: 90px;
+    height: 5px;
+  }
+  .button-group {
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 1rem;
+    max-width: 100%;
+  }
+  .toggle-button {
+    max-width: 100%;
+    padding: 0.8rem 1.5rem;
+    letter-spacing: 1px;
+  }
+  .main-card {
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+  .profile-avatar-section {
+    margin-bottom: 2rem;
+  }
+  .profile-avatar-wrapper {
+    width: 90px; /* Adjust size for smaller screens */
+    height: 90px;
+    border: 3px solid transparent;
+  }
+  .profile-avatar {
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    border: 3px solid #ffffff;
+  }
+  .loading-indicator, .error-alert, .success-alert, .no-profile-data {
+    margin-bottom: 1.8rem;
+  }
+  .error-alert, .success-alert {
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+  }
+  .profile-form {
+    gap: 1.5rem;
+  }
+  .form-group label {
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+  .input-field {
+    font-size: 1rem;
+    padding: 0.8rem 1.1rem;
+  }
+  .error-messages {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+  }
+  .save-button, .dashboard-button {
+    padding: 0.9rem 1.8rem;
+    margin-top: 2rem;
+    letter-spacing: 1px;
+  }
+  .profile-view {
+    gap: 1rem;
+    font-size: 1.05rem;
+  }
+  .profile-view-item {
+    padding: 0.5rem 0;
+  }
+  .profile-view-item strong {
+    margin-right: 1.2rem;
+  }
+  .no-profile-data {
+    margin-top: 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .full {
+    padding: 1rem;
+  }
+  .profile-heading {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+  }
+  .profile-heading::after {
+    width: 70px;
+    height: 4px;
+  }
+  .main-card {
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+  }
+  .profile-avatar-section {
+    margin-bottom: 1.5rem;
+  }
+  .profile-avatar-wrapper {
+    width: 80px; /* Even smaller for very small screens */
+    height: 80px;
+    border: 2px solid transparent;
+  }
+  .profile-avatar {
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border: 2px solid #ffffff;
+  }
+  .loading-indicator, .error-alert, .success-alert, .no-profile-data {
+    margin-bottom: 1.5rem;
+  }
+  .error-alert, .success-alert {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    gap: 0.8rem;
+  }
+  .profile-form {
+    gap: 1.2rem;
+  }
+  .form-group label {
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.04em;
+  }
+  .input-field {
+    font-size: 0.9rem;
+    padding: 0.7rem 0.9rem;
+  }
+  .error-messages {
+    font-size: 0.7rem;
+    margin-top: 0.4rem;
+  }
+  .save-button, .dashboard-button {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.2rem;
+    margin-top: 1.5rem;
+    letter-spacing: 0.8px;
+  }
+  .profile-view {
+    font-size: 1rem;
+    gap: 0.8rem;
+  }
+  .profile-view-item {
+    padding: 0.4rem 0;
+  }
+  .profile-view-item strong {
+    margin-right: 1rem;
+  }
+  .no-profile-data {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+  }
+}

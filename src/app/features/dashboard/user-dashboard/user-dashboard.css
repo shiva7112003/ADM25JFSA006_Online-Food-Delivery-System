@@ -1,0 +1,269 @@
+/* Container for the main content of the entire page */
+.full {
+  min-height: 100vh;
+  background: white;
+  padding: 2rem;
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Dashboard container for all sections */
+.dashboard-container {
+  width: 100%;
+  max-width: 45rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Main heading for the dashboard */
+.dashboard-container > h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 0;
+  position: relative;
+  color: #FF5722;
+}
+
+.dashboard-container > h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 4px;
+  background-color: #FF5722;
+  border-radius: 2px;
+}
+
+/* NEW: Container for the top two sections */
+.top-section-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* CHANGED: This makes both cards the same height */
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Styling for each individual section (Profile, Stats, Orders) */
+.section {
+  background-color: whitesmoke;
+  padding: 2.5rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+/* Make the sections inside the top row flexible */
+.top-section-row .section {
+  flex: 1;
+}
+
+/* Error message from service */
+.error {
+  color: #E74C3C;
+  background-color: rgba(231, 76, 60, 0.1);
+  border: 1px solid #E74C3C;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+/* Loading state for profile details */
+.section.loading-state {
+  text-align: center;
+  padding: 2.5rem;
+}
+
+.section.loading-state p {
+  font-style: italic;
+  color: #888888;
+  margin: 0;
+}
+
+/* Sub-section headings inside the card */
+.section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #333333;
+}
+
+/* Profile section with welcome message and email */
+.section.profile {
+  text-align: center;
+}
+
+.section.profile h3 {
+  margin-bottom: 0.5rem;
+}
+
+.section.profile p {
+  margin: 0;
+  color: #555555;
+  font-size: 1.1rem;
+}
+
+/* Actions button group */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+
+.actions button {
+  background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+  text-align: center;
+  width: 100%;
+  max-width: 20rem;
+}
+
+.actions button:hover {
+  background: linear-gradient(135deg, #388E3C 0%, #4CAF50 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.5);
+}
+
+/* Order stats list */
+.section.stats ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-top: 0;
+}
+
+.section.stats li {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555555;
+}
+
+/* Order cards container */
+.section.orders {
+  padding-bottom: 1rem;
+}
+
+/* Individual order cards */
+.order-card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 0.75rem;
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+}
+
+.order-card:last-child {
+  margin-bottom: 0;
+}
+
+.order-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #333333;
+}
+
+/* Status labels */
+.status {
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #333333;
+}
+
+.status.delivered {
+  background-color: #2ECC71;
+  color: #ffffff;
+}
+
+.status.pending {
+  background-color: #FFC107;
+  color: #ffffff;
+}
+
+.status.cancelled {
+  background-color: #E74C3C;
+  color: #ffffff;
+}
+
+/* Item list inside orders */
+.order-card ul {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  color: #555555;
+}
+
+.order-card li {
+  margin-bottom: 0.5rem;
+}
+
+/* No recent orders message */
+.no-recent-orders {
+  text-align: center;
+  font-style: italic;
+  color: #888888;
+}
+
+/* Responsive tweaks */
+@media (max-width: 992px) {
+  .top-section-row {
+    flex-direction: column; /* Stacks sections vertically on tablets and smaller */
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .full {
+    padding: 1.2rem;
+  }
+  .dashboard-container {
+    gap: 1.5rem;
+  }
+  .section {
+    padding: 1.5rem;
+  }
+  .dashboard-container > h2 {
+    font-size: 1.8rem;
+  }
+  .section h3 {
+    font-size: 1.25rem;
+  }
+  .order-card {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .welcome-info {
+    font-size: 1rem;
+  }
+  .actions button {
+    max-width: 15rem;
+  }
+}

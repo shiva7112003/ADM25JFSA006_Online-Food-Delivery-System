@@ -1,0 +1,127 @@
+<app-nav-profile></app-nav-profile>
+<div class="full">
+  <div class="profile-container">
+    <h2 class="profile-heading">
+      {{ isEditing ? 'Edit Your Profile' : 'Your Profile' }}
+    </h2>
+
+    <div class="button-group">
+      <button class="toggle-button" (click)="toggleMode()">
+        {{ isEditing ? '👀 View Profile' : '✏️ Edit Profile' }}
+      </button>
+    </div>
+
+    <div class="main-card">
+      <!-- Profile Avatar Section -->
+      <div class="profile-avatar-section">
+        <div class="profile-avatar-wrapper">
+          <img src="image/user.jpg" alt="User Avatar" class="profile-avatar">
+        </div>
+      </div>
+
+      <!-- Loading Indicator -->
+      <ng-container *ngIf="(profileService.isLoading | async)">
+        <div class="loading-indicator">
+          <p>Loading profile data...</p>
+        </div>
+      </ng-container>
+
+      <!-- Error Message -->
+      <ng-container *ngIf="(profileService.error | async) as err">
+        <div class="error-alert" role="alert">
+          <strong>Error!</strong>
+          <span>{{ err }}</span>
+        </div>
+      </ng-container>
+
+      <!-- Success Message -->
+      <ng-container *ngIf="showSuccessMessage">
+        <div class="success-alert" role="alert">
+          <strong>Success!</strong>
+          <span>{{ successMessage }}</span>
+        </div>
+      </ng-container>
+
+      <!-- Form shown in edit mode -->
+      <ng-container *ngIf="isEditing">
+        <form [formGroup]="profileForm" (ngSubmit)="saveChanges()" novalidate class="profile-form">
+          <!-- Name Field -->
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" formControlName="name" type="text" class="input-field" placeholder="Enter your name" />
+            <div class="error-messages" *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
+              <p *ngIf="profileForm.get('name')?.errors?.['required']">Name is required.</p>
+              <p *ngIf="profileForm.get('name')?.errors?.['minlength']">Minimum 3 characters.</p>
+            </div>
+          </div>
+
+          <!-- Email Field -->
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" class="input-field" placeholder="Enter your email" />
+            <div class="error-messages" *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+              <p *ngIf="profileForm.get('email')?.errors?.['required']">Email is required.</p>
+              <p *ngIf="profileForm.get('email')?.errors?.['email']">Invalid email format.</p>
+              <p *ngIf="profileForm.get('email')?.errors?.['dotComRequired']">Email must end with ".com"</p>
+            </div>
+          </div>
+
+          <!-- Phone Field -->
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" formControlName="phone" type="tel" class="input-field" placeholder="Enter your 10-digit phone number" />
+            <div class="error-messages" *ngIf="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched">
+              <p *ngIf="profileForm.get('phone')?.errors?.['required']">Phone number is required.</p>
+              <p *ngIf="profileForm.get('phone')?.errors?.['pattern']">10-digit format required.</p>
+            </div>
+          </div>
+
+          <!-- Address Field -->
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" formControlName="address" rows="3" class="input-field" placeholder="Enter your delivery address"></textarea>
+            <div class="error-messages" *ngIf="profileForm.get('address')?.invalid && profileForm.get('address')?.touched">
+              <p>Address is required.</p>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            [disabled]="!profileForm.valid || (profileService.isLoading | async)"
+            class="save-button"
+          >
+            <ng-container *ngIf="!(profileService.isLoading | async); else saving">
+              <span>💾 Save Changes</span>
+            </ng-container>
+            <ng-template #saving>
+              <span>Saving...</span>
+            </ng-template>
+          </button>
+        </form>
+      </ng-container>
+
+      <!-- View-only display when not editing -->
+      <ng-container *ngIf="!isEditing && userProfile as profile">
+        <div class="profile-view">
+          <p class="profile-view-item"><strong>Name:</strong> <span>{{ profile.name }}</span></p>
+          <p class="profile-view-item"><strong>Email:</strong> <span>{{ profile.email }}</span></p>
+          <p class="profile-view-item"><strong>Phone:</strong> <span>{{ profile.phone }}</span></p>
+          <p class="profile-view-item"><strong>Address:</strong> <span>{{ profile.address }}</span></p>
+
+          <button type="button" class="dashboard-button" (click)="goToDashboard()">
+            📊 Profile Dashboard
+          </button>
+        </div>
+      </ng-container>
+
+      <!-- No profile data fallback -->
+      <ng-container *ngIf="!isEditing && !(profileService.isLoading | async) && !(profileService.error | async) && !userProfile">
+        <div class="no-profile-data">
+          <p>No profile data available. Please try editing or ensure you are logged in.</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

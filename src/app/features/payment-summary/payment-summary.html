@@ -1,0 +1,16 @@
+<app-nav-checkout></app-nav-checkout>
+<div class="payment-summary">
+<div class="summary-container">
+  <h2>✅ Order Placed Successfully</h2>
+  <p>Transaction ID: {{ transaction.transactionId }}</p>
+  <p>Payment Method: {{ transaction.method }}</p>
+  <p *ngIf="transaction.cardType">Card Type: {{ transaction.cardType }}</p>
+  <p>Total Amount: ₹{{ transaction.amount }}</p>
+  <p *ngIf="transaction.coupon">Coupon Applied: {{ transaction.coupon }}</p>
+ 
+  <button (click)="trackOrder()">Track My Order</button>
+</div>
+ 
+</div>
+ 
+<app-footer></app-footer>

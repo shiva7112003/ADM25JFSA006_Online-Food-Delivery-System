@@ -1,0 +1,32 @@
+<app-nav-checkout></app-nav-checkout>
+<h1>Checkout Summary</h1>
+<div class="checkout-wrapper">
+  <!-- Delivery Address -->
+  <div class="left-panel">
+    <h3>Delivery Address</h3>
+    <input [(ngModel)]="address.name" placeholder="Name" />
+    <input [(ngModel)]="address.line1" placeholder="Address Line 1" />
+    <input [(ngModel)]="address.line2" placeholder="Address Line 2" />
+    <input [(ngModel)]="address.city" placeholder="City" />
+    <input [(ngModel)]="address.pincode" placeholder="Pincode" maxlength="6" />
+  </div>
+ 
+  <!-- Cart Summary -->
+  <div class="right-panel">
+    <h3>Cart Summary</h3>
+    <div class="cart-items" *ngIf="getCartItems().length > 0">
+      <div class="item" *ngFor="let item of getCartItems()">
+        <span>{{ item.name }}</span>
+        <span>₹{{ item.price }}</span>
+      </div>
+      <div class="total-row">
+        <strong>Total:</strong>
+        <strong>₹{{ getCartTotal() }}</strong>
+      </div>
+      <button class="payment-btn" (click)="proceedToPayment()">Choose Payment</button>
+    </div>
+    <div *ngIf="getCartItems().length === 0" class="empty-cart">Cart is empty</div>
+  </div>
+</div>
+ 
+<app-footer></app-footer>
