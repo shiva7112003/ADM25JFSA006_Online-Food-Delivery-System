@@ -33,11 +33,24 @@ export class OrderService {
 
   // 💾 Restore from local storage if needed
   loadCachedOrders(): void {
-    const stored = localStorage.getItem('userOrders');
-    if (stored && this.ordersSubject.getValue().length === 0) {
-      this.ordersSubject.next(JSON.parse(stored));
-    }
+  const stored = localStorage.getItem('userOrders');
+
+  if (!stored) {
+    console.warn('⚠️ No cached orders found in localStorage.');
+    return;
   }
+
+  try {
+    const parsed = JSON.parse(stored);
+    if (Array.isArray(parsed) && this.ordersSubject.getValue().length === 0) {
+      this.ordersSubject.next(parsed);
+    } else {
+      console.warn('⚠️ Cached data is not a valid order array.');
+    }
+  } catch (error) {
+    console.error('❌ Failed to parse cached orders:', error);
+  }
+}
 
   // 🔗 Get the observable reference
   getOrders(): Observable<OrderDetail[]> {
