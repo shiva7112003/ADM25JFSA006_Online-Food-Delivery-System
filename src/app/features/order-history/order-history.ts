@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OrderDetail } from '../../Model/order-detail';
 import { OrderService } from '../../Service/order-service';
 import { Router } from '@angular/router';
@@ -19,7 +19,6 @@ export class OrderHistory implements OnDestroy {
   private subscription: Subscription | null = null;
 
   constructor(private orderService: OrderService, private router: Router) {
-    this.orderService.loadCachedOrders();
     this.orderService.fetchOrders();
     this.subscription = this.orderService.getOrders().subscribe(orders => {
       this.orderList = orders;
@@ -28,7 +27,7 @@ export class OrderHistory implements OnDestroy {
   }
 
   backToDashboard(): void {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/user-dashboard']);
   }
 
   getOrderTotal(order: OrderDetail): number {

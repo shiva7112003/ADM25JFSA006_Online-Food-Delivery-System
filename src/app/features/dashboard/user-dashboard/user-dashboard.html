@@ -1,83 +1,48 @@
 <app-nav-profile></app-nav-profile>
+
 <div class="full">
   <div class="dashboard-container">
     <h2>Profile Dashboard</h2>
 
-    <div *ngIf="profileService.error | async as err" class="error">
-      ⚠️ {{ err }}
-    </div>
-
     <div class="top-section-row">
+      <!-- 👤 Profile Section -->
       <ng-container *ngIf="userProfile as profile; else loadingProfile">
-        <div class="section profile">
+        <section class="section profile">
           <h3>Welcome, {{ profile.name }}</h3>
-          <p>Email: {{ profile.email }}</p>
+          <p><strong>Email:</strong> {{ profile.email }}</p>
 
           <div class="actions">
-            <button (click)="navigateToProfile()">✏️ Edit Profile</button>
-            <button (click)="navigateToOrders()">🗂️ View All Orders</button>
+            <button type="button" (click)="navigateToProfile()">✏️ Edit Profile</button>
           </div>
-        </div>
+        </section>
       </ng-container>
 
       <ng-template #loadingProfile>
-        <div class="section loading-state">
+        <section class="section loading-state">
           <p>⏳ Loading profile details...</p>
-        </div>
+        </section>
       </ng-template>
 
-      <div class="section stats">
+      <!-- 📦 Order Stats Section -->
+      <section class="section stats">
         <h3>Order Status</h3>
         <ul>
-          <li>Total Orders: {{ totalOrders }}</li>
-          <li>Delivered: {{ deliveredOrders }}</li>
-          <li>Pending: {{ pendingOrders }}</li>
+          <li><strong>Total Orders:</strong> {{ totalOrders }}</li>
+          <li><strong>Delivered:</strong> {{ deliveredOrders }}</li>
+          <li><strong>Pending:</strong> {{ pendingOrders }}</li>
         </ul>
-      </div>
+      </section>
     </div>
 
-    <div class="section orders">
-      <h3>Recent Food Orders</h3>
-
-      <!-- Loading state for orders -->
-      <div *ngIf="isLoadingOrders" class="loading-state">
-        <p>⏳ Loading your recent orders...</p>
+    <!-- 🧾 Orders Navigation -->
+    <section class="section orders">
+      <h3>Your Orders</h3>
+      <p>Want to see your full order history?</p>
+      <div class="actions">
+        <button type="button" (click)="navigateToOrders()">🗂️ View All Orders</button>
       </div>
-
-      <!-- Orders content -->
-      <div *ngIf="!isLoadingOrders">
-        <div *ngIf="recentOrders.length > 0; else noRecent">
-          <div *ngFor="let order of recentOrders" class="order-card">
-            <div class="order-header">
-              <span><strong>ID:</strong> {{ order.orderId }}</span>
-              <span><strong>Customer ID:</strong> {{ order.id }}</span>
-              <span><strong>Restaurant ID:</strong> {{ order.restaurant_id }}</span>
-              <span class="status"
-                    [class.delivered]="order.status === 'Delivered'"
-                    [class.pending]="order.status === 'Pending'"
-                    [class.cancelled]="order.status === 'Cancelled'">
-                {{ order.status }}
-              </span>
-            </div>
-            <p><strong>Restaurant:</strong> {{ order.restaurant }}</p>
-
-            <div><strong>Items:</strong>
-              <ul>
-                <li *ngFor="let item of order.items">
-                  🍽️ {{ item.name }} × {{ item.quantity }} — ₹{{ item.price }}
-                </li>
-              </ul>
-            </div>
-
-            <p><strong>Total:</strong> ₹{{ getOrderTotal(order) }}</p>
-          </div>
-        </div>
-
-        <ng-template #noRecent>
-          <p class="no-recent-orders">No recent orders available 😕</p>
-        </ng-template>
-      </div>
-    </div>
+    </section>
   </div>
 </div>
+
 <app-footer></app-footer>

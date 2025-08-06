@@ -19,21 +19,6 @@
         </div>
       </div>
 
-      <!-- Loading Indicator -->
-      <ng-container *ngIf="(profileService.isLoading | async)">
-        <div class="loading-indicator">
-          <p>Loading profile data...</p>
-        </div>
-      </ng-container>
-
-      <!-- Error Message -->
-      <ng-container *ngIf="(profileService.error | async) as err">
-        <div class="error-alert" role="alert">
-          <strong>Error!</strong>
-          <span>{{ err }}</span>
-        </div>
-      </ng-container>
-
       <!-- Success Message -->
       <ng-container *ngIf="showSuccessMessage">
         <div class="success-alert" role="alert">
@@ -88,15 +73,10 @@
           <!-- Submit Button -->
           <button
             type="submit"
-            [disabled]="!profileForm.valid || (profileService.isLoading | async)"
+            [disabled]="!profileForm.valid"
             class="save-button"
           >
-            <ng-container *ngIf="!(profileService.isLoading | async); else saving">
-              <span>💾 Save Changes</span>
-            </ng-container>
-            <ng-template #saving>
-              <span>Saving...</span>
-            </ng-template>
+            <span>💾 Save Changes</span>
           </button>
         </form>
       </ng-container>
@@ -116,7 +96,7 @@
       </ng-container>
 
       <!-- No profile data fallback -->
-      <ng-container *ngIf="!isEditing && !(profileService.isLoading | async) && !(profileService.error | async) && !userProfile">
+      <ng-container *ngIf="!isEditing && !userProfile">
         <div class="no-profile-data">
           <p>No profile data available. Please try editing or ensure you are logged in.</p>
         </div>
