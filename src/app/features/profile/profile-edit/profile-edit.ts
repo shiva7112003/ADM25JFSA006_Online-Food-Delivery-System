@@ -99,7 +99,7 @@ export class ProfileEdit implements OnInit {
 
 
   goToDashboard(): void {
-    this.router.navigate(['/user-dashboard']);
+    this.router.navigate(['/dashboard']);
   }
 
   dotComValidator(control: AbstractControl): ValidationErrors | null {
