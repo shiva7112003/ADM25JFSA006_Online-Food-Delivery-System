@@ -1,7 +1,7 @@
 {
   "profile": {
     "customer_id": 0,
-    "name": "Shiva",
+    "name": "Saalik",
     "email": "chaandy@gmail.com",
     "phone": "1312313211",
     "address": "House No: 6A, Hyder garden !st street, ch-12\n"
@@ -142,6 +142,22 @@
     {
       "id": "5aec",
       "transactionId": "TXN-1754463674253",
+      "method": "COD",
+      "cardType": "Unknown",
+      "coupon": "",
+      "amount": 200
+    },
+    {
+      "id": "dee2",
+      "transactionId": "TXN-1754484793243",
+      "method": "COD",
+      "cardType": "Unknown",
+      "coupon": "",
+      "amount": 200
+    },
+    {
+      "id": "1e39",
+      "transactionId": "TXN-1754484807804",
       "method": "COD",
       "cardType": "Unknown",
       "coupon": "",
